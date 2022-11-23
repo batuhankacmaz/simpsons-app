@@ -11,7 +11,7 @@ const Stack = createStackNavigator();
 const SimpsonsStack = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={Simpsons} />
+      <Stack.Screen name="Simpsons" component={Simpsons} />
       <Stack.Screen name="Details" component={Details} />
       <Stack.Screen
         name="Create"
