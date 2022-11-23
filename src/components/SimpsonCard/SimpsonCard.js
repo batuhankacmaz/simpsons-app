@@ -6,7 +6,7 @@ import {AntDesign} from "@expo/vector-icons";
 import SimpsonButton from "../SimpsonButton";
 const SimpsonCard = ({item, navigation}) => {
   const navigateToDetails = () => {
-    navigation.navigate("Details");
+    navigation.navigate("Details", item.item);
   };
   return (
     <TouchableOpacity style={styles.container} onPress={navigateToDetails}>
