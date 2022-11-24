@@ -37,7 +37,34 @@ export const simpsonSlice = createSlice({
       ];
     },
     deleteSimpson: (state, action) => {
-      console.log("action", action);
+      const selectedId = action.payload;
+      if (selectedId) {
+        state.simpsons = state.simpsons.filter(
+          (item) => item.id !== selectedId
+        );
+      }
+    },
+    upSimpson: (state, action) => {
+      const selectedId = action.payload;
+      const selectedItem = state.simpsons.find(
+        (item) => item.id === selectedId
+      );
+      const selectedIndex = state.simpsons.indexOf(selectedItem);
+      if (selectedIndex !== 0) {
+        state.simpsons[selectedIndex] = state.simpsons[selectedIndex - 1];
+        state.simpsons[selectedIndex - 1] = selectedItem;
+      }
+    },
+    downSimpson: (state, action) => {
+      const selectedId = action.payload;
+      const selectedItem = state.simpsons.find(
+        (item) => item.id === selectedId
+      );
+      const selectedIndex = state.simpsons.indexOf(selectedItem);
+      if (selectedIndex !== state.simpsons.length - 1) {
+        state.simpsons[selectedIndex] = state.simpsons[selectedIndex + 1];
+        state.simpsons[selectedIndex + 1] = selectedItem;
+      }
     },
   },
   extraReducers: (builder) => {
@@ -56,7 +83,8 @@ export const simpsonSlice = createSlice({
   },
 });
 
-export const {addSimpson} = simpsonSlice.actions;
+export const {addSimpson, deleteSimpson, upSimpson, downSimpson} =
+  simpsonSlice.actions;
 export const selectSimpsons = (state) => state.simpson.simpsons;
 export const selectLastId = (state) => state.simpson.lastId;
 export default simpsonSlice.reducer;

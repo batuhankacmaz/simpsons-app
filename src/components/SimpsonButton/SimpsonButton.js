@@ -2,9 +2,9 @@ import {View, TouchableOpacity} from "react-native";
 import React from "react";
 import styles from "./SimpsonButton.styles";
 
-const SimpsonButton = ({children}) => {
+const SimpsonButton = ({children, onPress}) => {
   return (
-    <TouchableOpacity style={styles.buttonContainer}>
+    <TouchableOpacity style={styles.buttonContainer} onPress={onPress}>
       {children}
     </TouchableOpacity>
   );

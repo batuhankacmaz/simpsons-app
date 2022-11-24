@@ -11,13 +11,6 @@ const renderSeperator = () => <View style={styles.seperator} />;
 const Home = ({navigation}) => {
   const simpsons = useSelector(selectSimpsons);
   const status = useSelector((state) => state.simpson.status);
-  const goToDetails = () => {
-    navigation.navigate("Details");
-  };
-
-  const goToCreate = () => {
-    navigation.navigate("Create");
-  };
 
   const dispatch = useDispatch();
 
