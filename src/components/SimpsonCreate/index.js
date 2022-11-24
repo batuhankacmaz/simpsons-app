@@ -1,1 +1,1 @@
-export {defaul} from "./SimpsonCreate";
+export {default} from "./SimpsonCreate";

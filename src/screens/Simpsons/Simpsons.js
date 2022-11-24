@@ -1,8 +1,9 @@
-import {View, Text, Button, FlatList} from "react-native";
+import {View, Text, Button, FlatList, ScrollView} from "react-native";
 import React, {useEffect, useState} from "react";
 import {useSelector, useDispatch} from "react-redux";
 import {selectSimpsons, fetchSimpsons} from "../../redux/simpsonSlice";
 import SimpsonCard from "../../components/SimpsonCard";
+import SimpsonCreate from "../../components/SimpsonCreate";
 import styles from "./Simpsons.styles";
 
 const renderSeperator = () => <View style={styles.seperator} />;
@@ -20,8 +21,8 @@ const Home = ({navigation}) => {
 
   const dispatch = useDispatch();
 
-  const renderItem = ({item}) => {
-    return <SimpsonCard item={item} navigation={navigation} />;
+  const renderItem = (item) => {
+    return <SimpsonCard simpson={item} navigation={navigation} />;
   };
 
   useEffect(() => {
@@ -29,23 +30,22 @@ const Home = ({navigation}) => {
   }, []);
 
   return (
-    <View>
+    <View style={styles.mainContainer}>
       {status == "success" ? (
         <FlatList
           data={simpsons}
           renderItem={renderItem}
           ItemSeparatorComponent={renderSeperator}
-          keyExtractor={({item}) => item.id}
+          keyExtractor={(item) => item.id}
+          nestedScrollEnabled
         />
       ) : (
         <Text>Loading</Text>
       )}
-      <Button onPress={goToCreate} accessibilityLabel="Create" title="Create" />
-      <Button
-        onPress={goToDetails}
-        accessibilityLabel="Details"
-        title="Details"
-      />
+
+      <View styles={styles.footerContainer}>
+        <SimpsonCreate navigation={navigation} />
+      </View>
     </View>
   );
 };

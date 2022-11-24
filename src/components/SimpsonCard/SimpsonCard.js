@@ -4,18 +4,19 @@ import styles from "./SimpsonCard.styles";
 import {FontAwesome} from "@expo/vector-icons";
 import {AntDesign} from "@expo/vector-icons";
 import SimpsonButton from "../SimpsonButton";
-const SimpsonCard = ({item, navigation}) => {
+const SimpsonCard = ({simpson, navigation}) => {
+  const cardNumber = simpson.index + 1;
   const navigateToDetails = () => {
-    navigation.navigate("Details", item.item);
+    navigation.navigate("Details", simpson.item);
   };
   return (
     <TouchableOpacity style={styles.container} onPress={navigateToDetails}>
       <View style={styles.itemContainer}>
-        <Text>{item.index}</Text>
-        <Image style={styles.avatar} source={{uri: item.item.avatar}} />
+        <Text>{cardNumber}</Text>
+        <Image style={styles.avatar} source={{uri: simpson.item.avatar}} />
       </View>
       <View style={styles.nameContainer}>
-        <Text>{item.item.name}</Text>
+        <Text>{simpson.item.name}</Text>
       </View>
 
       <View style={styles.buttonContainer}>
