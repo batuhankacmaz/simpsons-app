@@ -12,18 +12,6 @@ const initialState = {
   lastId: 0,
 };
 
-export const fetchLocalSimpsons = createAsyncThunk(
-  "simpsons/getSimpsons",
-  async () => {
-    try {
-      const value = await AsyncStorage.getItem("simpsons");
-      return value;
-    } catch (e) {
-      console.log(e);
-    }
-  }
-);
-
 export const setLocalSimpsons = () => {
   return async (dispatch, getState) => {
     try {

@@ -1,4 +1,4 @@
-import {View, Text, Button, FlatList, ScrollView} from "react-native";
+import {View, Text, FlatList, ActivityIndicator} from "react-native";
 import React, {useEffect, useState} from "react";
 import {useSelector, useDispatch} from "react-redux";
 import {selectSimpsons, fetchSimpsons} from "../../redux/simpsonSlice";
@@ -33,12 +33,18 @@ const Home = ({navigation}) => {
           nestedScrollEnabled
         />
       ) : (
-        <Text>Loading</Text>
+        <ActivityIndicator
+          style={styles.loading}
+          size="large"
+          color="#2e86de"
+        />
       )}
 
-      <View styles={styles.footerContainer}>
-        <SimpsonCreate navigation={navigation} />
-      </View>
+      {status == "success" && (
+        <View styles={styles.footerContainer}>
+          <SimpsonCreate navigation={navigation} />
+        </View>
+      )}
     </View>
   );
 };
