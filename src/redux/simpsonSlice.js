@@ -25,7 +25,7 @@ export const fetchLocalSimpsons = createAsyncThunk(
 );
 
 export const setLocalSimpsons = () => {
-  return async (getState) => {
+  return async (dispatch, getState) => {
     try {
       const currentState = getState().simpson.simpsons;
       const jsonValue = JSON.stringify(currentState);
