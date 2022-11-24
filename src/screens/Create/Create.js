@@ -4,7 +4,7 @@ import SimpsonLabel from "../../components/SimpsonLabel";
 import SimpsonError from "../../components/SimpsonError";
 import uuid from "react-native-uuid";
 import {useDispatch} from "react-redux";
-import {addSimpson} from "../../redux/simpsonSlice";
+import {addSimpson, setLocalSimpsons} from "../../redux/simpsonSlice";
 import styles from "./Create.styles";
 const CreateCharacter = ({navigation}) => {
   const [fullname, setFullname] = useState("");
@@ -19,6 +19,7 @@ const CreateCharacter = ({navigation}) => {
     if (fullname && job && description && avatar) {
       const simpson = {name: fullname, avatar, job, description, id: uuid.v1()};
       dispatch(addSimpson(simpson));
+      dispatch(setLocalSimpsons());
       navigation.navigate("Simpsons");
     } else {
       setError(true);

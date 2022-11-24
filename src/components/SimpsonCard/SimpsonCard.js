@@ -1,7 +1,12 @@
 import {View, Text, Image, TouchableOpacity} from "react-native";
 import React from "react";
 import {useDispatch} from "react-redux";
-import {deleteSimpson, upSimpson, downSimpson} from "../../redux/simpsonSlice";
+import {
+  deleteSimpson,
+  upSimpson,
+  downSimpson,
+  setLocalSimpsons,
+} from "../../redux/simpsonSlice";
 import styles from "./SimpsonCard.styles";
 import {FontAwesome} from "@expo/vector-icons";
 import {AntDesign} from "@expo/vector-icons";
@@ -15,12 +20,15 @@ const SimpsonCard = ({simpson, navigation}) => {
   const dispatch = useDispatch();
   const onDeleteSimpson = () => {
     dispatch(deleteSimpson(simpson.item.id));
+    dispatch(setLocalSimpsons());
   };
   const onUpSimpson = () => {
     dispatch(upSimpson(simpson.item.id));
+    dispatch(setLocalSimpsons());
   };
   const onDownSimpson = () => {
     dispatch(downSimpson(simpson.item.id));
+    dispatch(setLocalSimpsons());
   };
   return (
     <TouchableOpacity style={styles.container} onPress={navigateToDetails}>

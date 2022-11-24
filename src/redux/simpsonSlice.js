@@ -1,6 +1,7 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "axios";
 import Constants from "expo-constants";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const simpsonUrl = Constants.expoConfig.extra.simpsonUrl;
 const defaultUrl = "https://5fc9346b2af77700165ae514.mockapi.io/simpsons";
@@ -11,12 +12,43 @@ const initialState = {
   lastId: 0,
 };
 
+export const fetchLocalSimpsons = createAsyncThunk(
+  "simpsons/getSimpsons",
+  async () => {
+    try {
+      const value = await AsyncStorage.getItem("simpsons");
+      return value;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+);
+
+export const setLocalSimpsons = () => {
+  return async (getState) => {
+    try {
+      const currentState = getState().simpson.simpsons;
+      const jsonValue = JSON.stringify(currentState);
+      await AsyncStorage.setItem("simpsons", jsonValue);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
+
 export const fetchSimpsons = createAsyncThunk(
   "simpsons/getSimpsons",
   async () => {
     try {
       const res = await axios.get(`${simpsonUrl || defaultUrl}`);
-      return res.data;
+      const jsonValue = await AsyncStorage.getItem("simpsons");
+      let value;
+      if (jsonValue != null) {
+        value = JSON.parse(jsonValue);
+        return value;
+      } else {
+        return res.data;
+      }
     } catch (e) {
       console.log(e);
     }
@@ -73,7 +105,7 @@ export const simpsonSlice = createSlice({
         state.status = "loading";
       })
       .addCase(fetchSimpsons.fulfilled, (state, action) => {
-        state.lastId = action.payload.length;
+        //state.lastId = action.payload.length;
         state.simpsons = action.payload;
         state.status = "success";
       })
