@@ -6,6 +6,7 @@ import uuid from "react-native-uuid";
 import {useDispatch} from "react-redux";
 import {addSimpson, setLocalSimpsons} from "../../redux/simpsonSlice";
 import styles from "./Create.styles";
+
 const CreateCharacter = ({navigation}) => {
   const [fullname, setFullname] = useState("");
   const [job, setJob] = useState("");
@@ -33,6 +34,7 @@ const CreateCharacter = ({navigation}) => {
     <View style={styles.container}>
       {error && <SimpsonError text="You have to fill every part" />}
       <SimpsonLabel
+        testID="fullname"
         title="Name Surname:"
         style={{height: 40}}
         max={25}
@@ -40,6 +42,7 @@ const CreateCharacter = ({navigation}) => {
         setValue={setFullname}
       />
       <SimpsonLabel
+        testID="job"
         title="Job Title:"
         style={{height: 40}}
         max={50}
@@ -47,6 +50,7 @@ const CreateCharacter = ({navigation}) => {
         setValue={setJob}
       />
       <SimpsonLabel
+        testID="description"
         title="About Him/Her:"
         style={{height: 100}}
         max={500}
@@ -54,13 +58,18 @@ const CreateCharacter = ({navigation}) => {
         setValue={setDescription}
       />
       <SimpsonLabel
+        testID="avatar"
         title="Image Link:"
         style={{height: 40}}
         max={120}
         value={avatar}
         setValue={setAvatar}
       />
-      <TouchableOpacity style={styles.buttonContainer} onPress={onSubmit}>
+      <TouchableOpacity
+        style={styles.buttonContainer}
+        testID="create-simpson"
+        onPress={onSubmit}
+      >
         <Text style={styles.buttonText}>Add Character</Text>
       </TouchableOpacity>
     </View>

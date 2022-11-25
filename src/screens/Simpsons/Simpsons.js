@@ -11,7 +11,6 @@ const renderSeperator = () => <View style={styles.seperator} />;
 const Home = ({navigation}) => {
   const simpsons = useSelector(selectSimpsons);
   const status = useSelector((state) => state.simpson.status);
-
   const dispatch = useDispatch();
 
   const renderItem = (item) => {
@@ -23,9 +22,10 @@ const Home = ({navigation}) => {
   }, []);
 
   return (
-    <View style={styles.mainContainer}>
+    <View style={styles.mainContainer} testID="view-simpsons">
       {status == "success" ? (
         <FlatList
+          testID="list-simpsons"
           data={simpsons}
           renderItem={renderItem}
           ItemSeparatorComponent={renderSeperator}

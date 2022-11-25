@@ -3,7 +3,7 @@ import axios from "axios";
 import Constants from "expo-constants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const simpsonUrl = Constants.expoConfig.extra.simpsonUrl;
+//const simpsonUrl = Constants.expoConfig.extra.simpsonUrl;
 const defaultUrl = "https://5fc9346b2af77700165ae514.mockapi.io/simpsons";
 
 const initialState = {
@@ -28,7 +28,7 @@ export const fetchSimpsons = createAsyncThunk(
   "simpsons/getSimpsons",
   async () => {
     try {
-      const res = await axios.get(`${simpsonUrl || defaultUrl}`);
+      const res = await axios.get(`${defaultUrl}`);
       const jsonValue = await AsyncStorage.getItem("simpsons");
       let value;
       if (jsonValue != null) {
